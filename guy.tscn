@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5o8n2fkfpqcs"]
+
+[ext_resource type="Script" path="res://guy.gd" id="1_wcjoj"]
+[ext_resource type="Texture2D" uid="uid://cqvdmmaxc10y3" path="res://asset/normal white.png" id="2_p28ku"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3dtsf"]
+radius = 19.0
+height = 68.0
+
+[node name="guy" type="CharacterBody2D"]
+script = ExtResource("1_wcjoj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+scale = Vector2(0.148438, 0.148438)
+texture = ExtResource("2_p28ku")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture = ExtResource("2_p28ku")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(19, 34, -19, 34, -19, -34, 19, -34)
+uv = PackedVector2Array(19, 34, -19, 34, -19, -34, 19, -34)
+bones = ["foot", PackedFloat32Array(0.5, 0.5, 0, 0), "foot/head", PackedFloat32Array(0, 0, 0.5, 0.5)]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="foot" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(0, 34)
+rest = Transform2D(1, 0, 0, 1, 0, 34)
+
+[node name="head" type="Bone2D" parent="Skeleton2D/foot"]
+position = Vector2(0, -68)
+rest = Transform2D(1, 0, 0, 1, 0, -68)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_3dtsf")

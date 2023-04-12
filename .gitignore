@@ -1,0 +1,6 @@
+# Godot 4+ specific ignores
+.godot/
+
+
+#default macos file, idk what it is even for
+.DS_Store
